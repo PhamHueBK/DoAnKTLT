@@ -1,0 +1,140 @@
+NV1
+Nguyen Minh 
+Hoang
+BKCorporation
+Chu tich
+06/07/1997
+Ha Noi
+So 1,Dong Ngac
+nguyenminhhoang@gmail.com	
+01675460285
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
+NV2
+Nguyen Duy 
+Doan
+BKCorporation
+Pho chu tich
+06/03/1998
+Ha Nam
+So 1,Ta Quang Buu
+nguyenduydoan@gmail.com	
+01675460284
+22/02/2016
+22/02/2016,7:50,18:00
+23/02/2016,7:52,18:05
+24/02/2016,7:45,12:30
+NV3
+Duong Van 
+Binh
+BKFood
+Giam doc
+06/07/1995
+Ha Tinh
+So 1,Dong Ngac
+duongvanbinh@gmail.com	
+01675460283
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
+NV4
+Pham Thi 
+Hue
+BKFood
+Pho giam doc
+06/07/1995
+Nam Dinh
+So 1,Ta Quang Buu
+phamthihue@gmail.com	
+01675460280
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
+NV5
+Nguyen Minh 
+Hue
+BKFood
+Nhan vien
+03/07/1996
+Ha Noi
+So 1,Dong Ngac
+nguyenminhhoang@gmail.com	
+01675460244
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
+NV6
+Nguyen Minh 
+Hoang
+Phong tai vu BKFood
+Truong phong
+06/07/1997
+Ha Noi
+So 1,Dong Ngac
+nguyenminhhoang@gmail.com	
+01675460222
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
+NV7
+Nguyen Minh 
+Long
+Phong tai vu BKFood
+Pho phong
+06/07/1993
+Ha Noi
+So 1,Dong Ngac
+nguyenminhlong@gmail.com	
+01675460211
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
+NV8
+Nguyen Minh 
+Binh
+Phong tai vu BKFood
+Nhan vien
+06/07/1998
+Ha Noi
+So 1,Dong Ngac 1
+nguyenminhbinh@gmail.com	
+01675460212
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
+NV9
+Nguyen Minh 
+An
+BKTech
+Giam doc
+06/07/1994
+Ha Noi
+So 1,Dong Ngac
+nguyenminhan@gmail.com	
+01675460234
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
+NV10
+Nguyen Minh 
+Ha
+BKTech
+Pho giam doc
+06/07/1994
+Ha Noi
+So 1,Dong Ngac
+nguyenminhha@gmail.com	
+01675460254
+22/02/2016
+22/02/2016,7:49,18:00
+23/02/2016,7:51,18:05
+24/02/2016,7:45,12:30
