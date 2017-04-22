@@ -1,0 +1,431 @@
+#include <iostream>
+#include <string>
+#include<fstream>
+#include<string.h>
+#include<vector>
+#include<stdlib.h>
+using namespace std;
+
+
+struct Date
+{
+	int ngay;
+	int thang;
+	int nam;
+};
+
+struct Time
+{
+	int gio;
+	int phut;
+};
+
+struct Node
+{
+	Date ngayLamViec;
+	Time gioDen;
+	Time gioVe;
+};
+
+struct NhanVien
+{
+	string maNV;
+	string ho;
+	string ten;
+	string DonVi;
+	string chucvu;
+	Date ngaySinh;
+	string queQuan;
+	string diaChi;
+	string email;
+	string soDienThoai;
+	Date ngayVaoLam;
+	Node ngayLamViec;
+	NhanVien *next;
+};
+
+struct Unit
+{
+	string name;
+	Unit *next;
+	NhanVien *nv;
+};
+
+struct DSDonVi{
+	Unit *head;
+};
+
+
+/*bool isNewStaff(string str)
+{
+	strlwr((char*)str.c_str());
+	if (str[0] == 'n' && str[1] == 'v'&& isdigit(str[2]))
+		return true;
+	else 
+		return false;
+}*/
+
+Date ConvertDate(string s)
+{
+	Date dt;
+	string ngay,thang,nam;
+	//tim ngay
+	int vitri=s.find('/');
+	for(int i=0;i<vitri;i++)
+		ngay.push_back(s[i]);
+	s.erase(0,vitri+1);
+	//tim thang
+	int vitri1=s.find('/');
+	for(int i=0;i<vitri1;i++)
+		thang.push_back(s[i]);
+	s.erase(0,vitri1+1);
+	//tim nam
+	int vitri2=s.find('/');
+	for(int i=0;i<vitri2;i++)
+		nam.push_back(s[i]);
+
+	int ngay1=atoi((char*)ngay.c_str());
+	int thang1=atoi((char*)thang.c_str());
+	int nam1=atoi((char*)nam.c_str());
+
+	dt.ngay=ngay1;
+	dt.thang=thang1;
+	dt.nam=nam1;
+
+	return dt;
+}
+
+Node ConvertNgayLamViec(string s)
+{
+	Node ngaylamviec;
+
+	// tim ngay lam viec
+	string ngay,thang,nam;
+	string gioden,phutden,giove,phutve;
+
+	//tim ngay
+	int vitri=s.find('/');
+	for(int i=0;i<vitri;i++)
+		ngay.push_back(s[i]);
+	s.erase(0,vitri+1);
+
+	//tim thang
+	int vitri1=s.find('/');
+	for(int i=0;i<vitri1;i++)
+		thang.push_back(s[i]);
+	s.erase(0,vitri1+1);
+
+	//tim nam
+	int vitri2=s.find(',');
+	for(int i=0;i<vitri2;i++)
+		nam.push_back(s[i]);
+	s.erase(0,vitri2+1);
+
+	//tim gio bat dau lam viec
+	int vitri3=s.find(':');
+	for(int i=0;i<vitri3;i++)
+		gioden.push_back(s[i]);
+	s.erase(0,vitri3+1);
+
+	//tim phut bat dau lam viec
+
+	int vitri4=s.find(',');
+	for(int i=0;i<vitri4;i++)
+		phutden.push_back(s[i]);
+	s.erase(0,vitri4+1);
+
+	//tim gio ve 
+	int vitri5=s.find(':');
+	for(int i=0;i<vitri5;i++)
+		giove.push_back(s[i]);
+	s.erase(0,vitri5+1);
+
+	phutve=s;
+
+	int ngay1=atoi((char*)ngay.c_str());
+	int thang1=atoi((char*)thang.c_str());
+	int nam1=atoi((char*)nam.c_str());
+	int gioden1=atoi((char*)gioden.c_str());
+	int phutden1=atoi((char*)phutden.c_str());
+	int giove1=atoi((char*)giove.c_str());
+	int phutve1=atoi((char*)phutve.c_str());
+
+	ngaylamviec.ngayLamViec.ngay=ngay1;
+	ngaylamviec.ngayLamViec.thang=thang1;
+	ngaylamviec.ngayLamViec.nam=nam1;
+	ngaylamviec.gioDen.gio=gioden1;
+	ngaylamviec.gioDen.phut=phutden1;
+	ngaylamviec.gioVe.gio=giove1;
+	ngaylamviec.gioVe.phut=phutve1;
+
+	return ngaylamviec;
+
+}
+
+bool KiemTraDonVi(DSDonVi &ds,string s)
+{
+	Unit *p=ds.head;
+	while(1)
+	{
+		if(p->name==s)// neu ton ten don vi trong danh sach thi ta return true
+			return true;
+		if(p->next==NULL)
+			break;
+		p=p->next;
+	}
+	return false;
+}
+Unit* CreateDonVi(string s)
+{
+	Unit *dv=new Unit;
+	dv->name=s;
+	dv->next=NULL;
+	dv->nv=NULL;//Khoi tao danh sach nhan vien rong
+	return dv;
+}
+NhanVien* CreateNhanVien(NhanVien nv)
+{
+	NhanVien *NV=new NhanVien;
+	NV->maNV=nv.maNV;
+	NV->ho=nv.ho;
+	NV->ten=nv.ten;
+	NV->DonVi=nv.DonVi;
+	NV->chucvu=nv.chucvu;
+	NV->ngaySinh=nv.ngaySinh;
+	NV->queQuan=nv.queQuan;
+	NV->diaChi=nv.diaChi;
+	NV->email=nv.email;
+	NV->soDienThoai=nv.soDienThoai;
+	NV->ngayVaoLam=nv.ngayVaoLam;
+	NV->next=NULL;
+	return NV;
+}
+/*void InsertToTail1(DSNhanVien &ds,NhanVien nv)
+{
+	NhanVien *p=NULL;//tao 1 con tro NULL
+	NhanVien *NV;
+	NV=CreateNhanVien(nv);
+	//Kiem Tra xem danh sach nhan vien co empty hay khong
+	if(ds.head1==NULL)//neu danh sach rong thi ta gan node nhan vien dau tien vao dau danh sach nhan vien luon
+	{
+		ds.head1=NV;
+		return ;
+	}
+	//neu danh sach khong rong thi ta chen node nhan vien vao cuoi danh sach nhan vien 
+	p=ds.head1;
+	while(p!=NULL)
+	{
+		if(p->next==NULL)
+		{
+			p->next=NV;
+		}
+		p=p->next;
+	}
+
+}*/
+
+void ChenDonVi(DSDonVi &ds,string s)
+{
+	Unit *p=NULL;//tao 1 con tro unit 
+	Unit *dv=CreateDonVi(s);
+	if(ds.head==NULL)
+	{ 
+		ds.head=dv;
+		return;
+	}
+	//Kiem tra xem don vi ton tai trong danh sach don vi hay chua??
+	//neu chua ton tai thi tao 
+	//neu ton tai trong danh sach don vi roi thi ta return
+	p=ds.head;
+	/*while(p!=NULL)
+	{
+		if(KiemTraDonVi(ds,s))
+			return ;
+		if(p->next==NULL)
+			break;
+		p=p->next;
+	}
+	p->next=dv;
+	*/
+	if(KiemTraDonVi(ds,s))
+		return;
+	while(p!=NULL)
+	{
+		if(p->next==NULL)
+			break;
+		p=p->next;
+	}
+	p->next=dv;
+
+}
+
+void ChenNhanVien(DSDonVi &ds,NhanVien nv)
+{
+	Unit *p=NULL;//tao 1 con tro unit
+	//Di tim don vi da co trong danh sach don vi de gan nhan vien vao don vi do
+	p=ds.head;
+	while(p!=NULL)
+	{
+		if(p->name==nv.DonVi)
+		{
+			break;
+		}
+		p=p->next;
+	}
+	//Khi tim thay don vi cua nhan vien roi thi ta chen vao danh sach nhan vien cua don vi do
+	NhanVien *p1=NULL;//tao 1 con tro NULL
+	NhanVien *NV=CreateNhanVien(nv);
+	//Kiem Tra xem danh sach nhan vien co empty hay khong
+	if(p->nv==NULL)//neu danh sach rong thi ta gan node nhan vien dau tien vao dau danh sach nhan vien luon
+	{
+		p->nv=NV;
+		return ;
+	}
+	//neu danh sach khong rong thi ta chen node nhan vien vao cuoi danh sach nhan vien 
+	p1=p->nv;
+	while(p1!=NULL)
+	{
+		if(p1->next==NULL)
+		{
+			break;
+		}
+		p1=p1->next;
+	}
+	p1->next=NV;
+}
+
+DSDonVi process()
+{
+	DSDonVi ds;//Tao 1 danh sach cac don vi
+	ds.head=NULL;//Khoi  tao danh sach ban dau empty
+	string chuoi;//Khoi tao 1 bien de lay gia tri chuoi tung dong trong file
+	NhanVien nv;//Khoi tao 1 bien nhan vien tam thoi
+	//Nhap file
+	ifstream fi("test.txt");
+	if(fi.fail())
+	{
+		cout<<"Khong doc duoc file"<<endl;
+	}
+	else{
+		cout<<"Doc duoc file "<<endl;
+		do
+		{
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.maNV=chuoi;
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.ho=chuoi;
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.ten=chuoi;
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.DonVi=chuoi;
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.chucvu=chuoi;
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.ngaySinh=ConvertDate(chuoi);
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.queQuan=chuoi;
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.diaChi=chuoi;
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.email=chuoi;
+
+			}
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.soDienThoai=chuoi;
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.ngayVaoLam=ConvertDate(chuoi);
+
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.ngayLamViec=ConvertNgayLamViec(chuoi);
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.ngayLamViec=ConvertNgayLamViec(chuoi);
+			}
+
+			if(!fi.eof())
+			{
+				getline(fi,chuoi);
+				nv.ngayLamViec=ConvertNgayLamViec(chuoi);
+			}
+
+
+			ChenDonVi(ds,nv.DonVi);
+			ChenNhanVien(ds,nv);
+	
+		
+		
+		
+		}while(1);
+	}
+	fi.close();
+	return ds;
+}
+
+int main()
+{
+	DSDonVi ds;
+	ds=process();
+	Unit *p=ds.head;
+	while(p!=NULL)
+	{
+		cout<<p->name<<endl;
+	}
+	system("pause");
+	return 0;
+}
